@@ -5,7 +5,7 @@ const initState = {
 }
 
 export default function reducer(state = initState, action) {
-    switch (action.type) {
+    switch (action?.type) {
         case ADD_COUNT:
             return {
                 ...state,
