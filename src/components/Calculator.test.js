@@ -1,7 +1,7 @@
 import {screen, render} from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
 import {Calculator} from "./Calculator";
-import {ON_ADD, ON_MUL, ON_SUB, ON_DIV} from "../modules/counter";
+import {ON_ADD, ON_MUL, ON_SUB, ON_DIV, ON_SET_INPUT1} from "../modules/counter";
 
 test(
     'should show a button with "+" that dispatches ON_ADD when clicked',
@@ -63,3 +63,21 @@ test(
         expect(dispatch).toHaveBeenCalledWith({type: ON_DIV})
     }
 )
+
+test('should show an input with a placeholder of "Some numbers" and type of number that dispatches',
+    () => {
+        const dispatch = jest.fn()
+        render(<Calculator _useDispatch={() => dispatch} _useSelector={() => {
+        }}/>)
+
+        const input = screen.getByPlaceholderText('Some numbers');
+        expect(input).toHaveAttribute('type', 'number')
+
+        userEvent.type(input, '2');
+        expect(dispatch).toHaveBeenCalledWith({
+            type: ON_SET_INPUT1,
+            value: '2'
+        })
+    }
+)
+

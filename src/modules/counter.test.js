@@ -5,7 +5,10 @@ test(
     () => {
         const state = reducer()
         expect(state).toStrictEqual({
-            count: 0
+            count: 0,
+            input1: '',
+            input2: '',
+            total: ''
         })
     }
 )
